@@ -17,7 +17,7 @@ public class ObjectSpawner : MonoBehaviour
 
     public void spawnGround()
     {
-        ObjectPooler.instance.Spawnfrompool("Ground", new Vector3(0, 0, 60f),groundspawndistance )  ;
+        ObjectPooler.instance.Spawnfrompool("Ground", new Vector3(0, 0, 60f),Quaternion.identity);
     }
 
 }
