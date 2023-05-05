@@ -9,6 +9,9 @@ public class PlayerControler : MonoBehaviour
     Rigidbody rb;
     public float jumpfoce = 50f;
     public bool IsGrounded;
+    public GameObject platforminc;
+
+
 
     public static PlayerControler inst;
 
@@ -47,7 +50,12 @@ public class PlayerControler : MonoBehaviour
     void fall()
     {
         animator.SetFloat("Y", rb.velocity.y);
-        Debug.Log("Y Value = " + rb.velocity.y);
+        // Debug.Log("Y Value = " + rb.velocity.y);
+
+         if (rb.velocity.y <= -4 )
+         {
+           Destroy(gameObject, .5f);             
+         }
     }
 
     
@@ -79,7 +87,7 @@ public class PlayerControler : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpfoce);
             animator.SetTrigger("Jump");
-            Debug.Log("onJump");
+           // Debug.Log("onJump");
         }
                       
     }    
@@ -95,8 +103,22 @@ public class PlayerControler : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             IsGrounded = false;
+
+            //other.transform.SetParent(transform,);
             //animator.SetTrigger("Falling");
         }
     }
 
+
+
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("hii");
+        if (other.gameObject.CompareTag("Other"))
+        {
+            Instantiate(platforminc);
+            Debug.Log("123");
+            
+        }
+    }
 }
